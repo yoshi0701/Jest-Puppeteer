@@ -3,6 +3,8 @@ import LoginPage from "../pages/LoginPage"
 import FeedbackPage from '../pages/FeedbackPage'
 import TopBar from "../pages/components/TopBar"
 
+import { username, password, timeout } from "../config";
+
 describe('Example', () => {
   let homePage;
   let loginPage;
@@ -10,7 +12,7 @@ describe('Example', () => {
   let topBar;
 
   beforeAll(async () => {
-    jest.setTimeout(15000)
+    jest.setTimeout(timeout)
     homePage = new HomePage();
     loginPage = new LoginPage();
     feedbackPage = new FeedbackPage();
@@ -48,6 +50,6 @@ describe('Example', () => {
     await topBar.isTopBarDispayed();
     await topBar.clickSignInButton();
     await loginPage.isLoginFromDisplayed();
-    await loginPage.login('username', 'password')
+    await loginPage.login(username, password)
   })
 });
