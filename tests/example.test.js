@@ -1,28 +1,28 @@
 import HomePage from "../pages/HomePage";
-// import LoginPage from "../pages/LoginPage"
+import LoginPage from "../pages/LoginPage"
 import FeedbackPage from '../pages/FeedbackPage'
 import TopBar from "../pages/components/TopBar"
 
 describe('Example', () => {
-  let homepage;
-  // let loginpage;
+  let homePage;
+  let loginPage;
   let feedbackPage;
-  let topbar;
+  let topBar;
 
   beforeAll(async () => {
     jest.setTimeout(15000)
-    homepage = new HomePage();
-    // loginpage = new LoginPage();
+    homePage = new HomePage();
+    loginPage = new LoginPage();
     feedbackPage = new FeedbackPage();
-    topbar = new TopBar();
+    topBar = new TopBar();
   })
   it('Homepage should work', async () => {
-    await homepage.visit();
+    await homePage.visit();
   });
 
   it('navbar sholud be displayed', async () => {
-    await homepage.isNavbarDisplayed();
-    await topbar.isTopBarDisplayed();
+    await homePage.isNavbarDisplayed();
+    await topBar.isTopBarDisplayed();
   });
 
   // it('try to login', async () => {
@@ -35,7 +35,19 @@ describe('Example', () => {
   it('feedback should work', async () => {
     await feedbackPage.visit();
     await feedbackPage.isFeedbackFormDisplayed();
-    await feedbackPage.submitFeedback('hoge', 'hoge@test.com', 'subject', 'comment');
-    await feedbackPage.wait(5000);
+    await feedbackPage.submitFeedback(
+      'hoge',
+      'hoge@test.com',
+      'subject',
+      'comment'
+    );
+  });
+
+  it('should longin to application', async () => {
+    await homePage.visit();
+    await topBar.isTopBarDispayed();
+    await topBar.clickSignInButton();
+    await loginPage.isLoginFromDisplayed();
+    await loginPage.login('username', 'password')
   })
 });
